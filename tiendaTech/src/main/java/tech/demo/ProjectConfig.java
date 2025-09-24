@@ -1,4 +1,4 @@
-package com.tienda;
+package tech.demo;
 //este es el que hay que correr
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

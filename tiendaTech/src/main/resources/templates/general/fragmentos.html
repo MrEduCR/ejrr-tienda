@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<!-- Declaración del tipo de documento HTML5 -->
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<!-- 
+  - xmlns:th -> Para usar atributos de Thymeleaf.
+  - xmlns:sec -> Para usar atributos de seguridad con Spring Security.
+-->
+
+<head th:fragment="head">
+    <!-- Fragmento de Thymeleaf reutilizable de head-->
+
+    <title>TechShop</title>
+    <!-- Título de la página -->
+
+    <meta charset="UTF-8" />
+    <!-- Codificación de caracteres -->
+
+    <!-- uso de estilos CSS y librerías usando Thymeleaf -->
+    <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
+    <!-- Bootstrap CSS -->
+    <link th:href="@{/webjars/font-awesome/css/all.css}" rel="stylesheet" />
+    <!-- Font Awesome -->
+    <!-- uso de scripts JS usando Thymeleaf -->
+    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <!-- jQuery -->
+    <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+    <!-- Popper.js para Bootstrap -->
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+    <!-- Bootstrap JS -->
+</head>
+
+<body>
+    <header th:fragment="header" class="header">
+        <!-- Fragmento de Thymeleaf reutilizable-->
+
+        <nav class="navbar navbar-expand-sm p-0">
+            <!-- Navbar Bootstrap -->
+
+            <div class="container">
+                <!-- Contenedor nromal -->
+
+                <a th:href="@{/}" class="navbar-brand">[[#{aplicacion.titulo}]]</a>
+                <!-- nombre de la aplicación con soporte para internacionalizar -->
+                 <!-- ="@{/}" genera la ruta auto, osea generar la URL que el navegador va a usar para pedir algo al servidor, pero no toca como tal el server, solo es vista-->
+
+                <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <!-- Boton -->
+
+                <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                    <!-- otro menu -->
+
+                    <ul class="navbar-nav">
+                        <!-- menu principal -->
+
+                        <li class="nav-item px-2">
+                            <a class="nav-link" th:href="@{/categoria/listado}">[[#{plantilla.categorias}]]</a>
+                        </li>
+                        <!-- Enlace a listado de categoras -->
+
+                        <li class="nav-item px-2">
+                            <a class="nav-link" th:href="@{/producto/listado}">[[#{plantilla.productos}]]</a>
+                        </li>
+                        <!-- Enlace a listado de productos -->
+
+                        <li class="nav-item dropdown">
+                            <!-- parte del menu" -->
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                                aria-expanded="false">[[#{plantilla.extras}]]</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item"
+                                        th:href="@{/pruebas/listado}">[[#{plantilla.asociaciones}]]</a></li>
+                                <li><a class="dropdown-item"
+                                        th:href="@{/pruebas/listado2}">[[#{plantilla.consultas}]]</a></li>
+
+                                        <!-- springboot ya busca los fragmentos en resources de one-->
+                            </ul>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <!-- Menú -->
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                                aria-expanded="false">
+                                [[#{plantilla.admin}]]</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" th:href="@{/usuario/listado}">[[#{plantilla.usuarios}]]</a>
+                                </li>
+                                <li class="submenu submenu-md dropend">
+                                    <!-- otro submenu-->
+                                    <a class="dropdown-item dropdown-toggle" role="button" data-bs-toggle="dropdown"
+                                        aria-expanded="false" onclick="event.stopPropagation();">
+                                        [[#{plantilla.seguridad}]]
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item"
+                                                th:href="@{/role/listado}">[[#{plantilla.troles}]]</a></li>
+                                        <li><a class="dropdown-item"
+                                                th:href="@{/usuario_role/asignar}">[[#{plantilla.permisos}]]</a></li>
+                                        <li><a class="dropdown-item"
+                                                th:href="@{/ruta/listado}">[[#{plantilla.rutas}]]</a></li>
+                                    </ul>
+                                </li>
+                                <li><a class="dropdown-item"
+                                        th:href="@{/constante/listado}">[[#{plantilla.constantes}]]</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <ul class="navbar-nav">
+                        <!--Aqui se eligen los idiomas-->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                                aria-expanded="false">
+                                [[#{plantilla.idioma}]]</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" th:href="@{/(lang=es)}">Español</a></li>
+                                <li><a class="dropdown-item" th:href="@{/(lang=en)}">English</a></li>
+                                <li><a class="dropdown-item" th:href="@{/(lang=fr)}">Française</a></li>
+                                <li><a class="dropdown-item" th:href="@{/(lang=pt)}">Portugaise</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <div id="resultBlock">
+                        
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <section id="main-header" class="py-2 bg-success text-white">
+            <!-- header principal -->
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h1><i class="fas fa-cog"></i> [[#{plantilla.suTienda}]]</h1>
+                        <!-- titulo con ícono -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </header>
+
+    <footer th:fragment="footer" class="p-2 mt-5 bg-info text-white">
+     
+        <p class="lead text-center">[[#{plantilla.derechos}]] &COPY;</p>
+        <!-- texto de derechos de autor -->
+    </footer>
+</body>
+
+</html>

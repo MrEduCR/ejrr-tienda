@@ -1,2 +1,6 @@
-tech\demo\DemoApplication.class
-tech\demo\ProjectConfig.class
+tech\ProjectConfig.class
+tech\services\CategoriaServices.class
+tech\repository\CategoriaRepository.class
+tech\domain\Categoria.class
+tech\DemoApplication.class
+tech\controller\CategoriaController.class

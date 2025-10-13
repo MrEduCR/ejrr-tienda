@@ -1,5 +1,6 @@
 tech\ProjectConfig.class
-tech\services\CategoriaServices.class
+tech\services\CategoriaService.class
+tech\services\FirebaseStorageService.class
 tech\repository\CategoriaRepository.class
 tech\domain\Categoria.class
 tech\DemoApplication.class

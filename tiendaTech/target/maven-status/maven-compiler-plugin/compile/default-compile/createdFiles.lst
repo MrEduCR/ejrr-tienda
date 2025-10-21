@@ -1,7 +1,11 @@
 tech\ProjectConfig.class
 tech\services\CategoriaService.class
 tech\services\FirebaseStorageService.class
+tech\controller\ProductoController.class
 tech\repository\CategoriaRepository.class
+tech\domain\Producto.class
 tech\domain\Categoria.class
 tech\DemoApplication.class
+tech\services\ProductoService.class
 tech\controller\CategoriaController.class
+tech\repository\ProductoRepository.class

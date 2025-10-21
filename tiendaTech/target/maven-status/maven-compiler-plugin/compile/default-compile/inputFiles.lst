@@ -1,7 +1,11 @@
 C:\Users\Edu\Desktop\2025\UNIVERSIDAD\7mo cuatri\Desarrollo web y patrones\ejrr-tienda\tiendaTech\src\main\java\tech\controller\CategoriaController.java
+C:\Users\Edu\Desktop\2025\UNIVERSIDAD\7mo cuatri\Desarrollo web y patrones\ejrr-tienda\tiendaTech\src\main\java\tech\controller\ProductoController.java
 C:\Users\Edu\Desktop\2025\UNIVERSIDAD\7mo cuatri\Desarrollo web y patrones\ejrr-tienda\tiendaTech\src\main\java\tech\DemoApplication.java
 C:\Users\Edu\Desktop\2025\UNIVERSIDAD\7mo cuatri\Desarrollo web y patrones\ejrr-tienda\tiendaTech\src\main\java\tech\domain\Categoria.java
+C:\Users\Edu\Desktop\2025\UNIVERSIDAD\7mo cuatri\Desarrollo web y patrones\ejrr-tienda\tiendaTech\src\main\java\tech\domain\Producto.java
 C:\Users\Edu\Desktop\2025\UNIVERSIDAD\7mo cuatri\Desarrollo web y patrones\ejrr-tienda\tiendaTech\src\main\java\tech\ProjectConfig.java
 C:\Users\Edu\Desktop\2025\UNIVERSIDAD\7mo cuatri\Desarrollo web y patrones\ejrr-tienda\tiendaTech\src\main\java\tech\repository\CategoriaRepository.java
+C:\Users\Edu\Desktop\2025\UNIVERSIDAD\7mo cuatri\Desarrollo web y patrones\ejrr-tienda\tiendaTech\src\main\java\tech\repository\ProductoRepository.java
 C:\Users\Edu\Desktop\2025\UNIVERSIDAD\7mo cuatri\Desarrollo web y patrones\ejrr-tienda\tiendaTech\src\main\java\tech\services\CategoriaService.java
 C:\Users\Edu\Desktop\2025\UNIVERSIDAD\7mo cuatri\Desarrollo web y patrones\ejrr-tienda\tiendaTech\src\main\java\tech\services\FirebaseStorageService.java
+C:\Users\Edu\Desktop\2025\UNIVERSIDAD\7mo cuatri\Desarrollo web y patrones\ejrr-tienda\tiendaTech\src\main\java\tech\services\ProductoService.java

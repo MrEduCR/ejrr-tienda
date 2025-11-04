@@ -9,3 +9,4 @@ tech\DemoApplication.class
 tech\services\ProductoService.class
 tech\controller\CategoriaController.class
 tech\repository\ProductoRepository.class
+tech\controller\ConsultaController.class

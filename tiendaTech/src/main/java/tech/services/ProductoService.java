@@ -9,6 +9,8 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+import java.math.BigDecimal;
+
 
 @Service
 public class ProductoService {
@@ -79,4 +81,11 @@ public class ProductoService {
     public List<Producto> consultaSQL(double precioInf, double precioSup) {
         return productoRepository.consultaSQL(precioInf, precioSup);
     }
+    
+    @Transactional(readOnly = true)
+    public List<Producto> consultaPorPrecio(BigDecimal precio) {
+        return productoRepository.findByPrecioExact(precio);
+    }
+    
+    
 }

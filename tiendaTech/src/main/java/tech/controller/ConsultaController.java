@@ -1,6 +1,5 @@
 package tech.controller;
 
-
 import tech.services.ProductoService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import java.math.BigDecimal;
 
 @Controller
 @RequestMapping("/consultas")
@@ -54,6 +54,14 @@ public class ConsultaController {
         model.addAttribute("productos", lista);
         model.addAttribute("precioInf", precioInf);
         model.addAttribute("precioSup", precioSup);
+        return "/consultas/listado";
+    }
+    
+    @PostMapping("/consultaPorPrecio")
+    public String consultaPorPrecio(@RequestParam("precio") BigDecimal precio, Model model) {
+        var lista = productoService.consultaPorPrecio(precio);
+        model.addAttribute("productos", lista);
+        model.addAttribute("precio", precio);
         return "/consultas/listado";
     }
 }

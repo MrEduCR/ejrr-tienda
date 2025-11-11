@@ -70,7 +70,7 @@
                 <div th:replace="~{consultas/fragmentos :: formularioConsulta('/consultas/consultaDerivada', #{pruebas.ampliadas}, 'primary')}"></div>
                 <div th:replace="~{consultas/fragmentos :: formularioConsulta('/consultas/consultaJPQL', #{pruebas.jpql}, 'warning')}"></div>
                 <div th:replace="~{consultas/fragmentos :: formularioConsulta('/consultas/consultaSQL', #{pruebas.nativo}, 'success')}"></div>
-                <div><div class="card">Acá va su consulta de la tarea #2</div></div>
+                <div th:replace="~{consultas/fragmentos :: formularioPrecio}"></div>
             </div>
         </section>
 
@@ -98,6 +98,32 @@
                 </div>
             </form>
         </div>
+
+        <div th:fragment="formularioPrecio">
+            <form method="post" th:action="@{/consultas/consultaPorPrecio}" class="was-validated">
+                <div class="card p-2">
+                    <div class="card-header text-center text-white bg-info">
+                        <h5>Buscar por precio exacto</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label>Precio</label>
+                            <input type="number" name="precio" class="form-control" th:value="${precio}"
+                                   min="0" step="0.01" required/>
+                            <div class="invalid-feedback">
+                                Ingrese un precio valido (ej: 1500.00).
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer text-center">
+                        <button type="submit" class="btn btn-info text-white">
+                            <i class="fa-solid fa-magnifying-glass"></i> Buscar
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
 
     </body>
 </html> 

@@ -1,6 +1,5 @@
 package tech;
 
-
 import tech.domain.Ruta;
 import tech.services.RutaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +19,19 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http, @Lazy RutaService rutaService) throws Exception {
         var rutas = rutaService.getRutas();
+
         http.authorizeHttpRequests(requests -> {
+            // PERMITIR RECURSOS ESTÁTICOS
+            requests.requestMatchers(
+                    "/css/**",
+                    "/js/**",
+                    "/images/**",
+                    "/webjars/**",
+                    "/favicon.ico",
+                    "/fav/**"
+            ).permitAll();
+
+            // RUTAS DINÁMICAS DESDE BD
             for (Ruta ruta : rutas) {
                 if (ruta.isRequiereRol()) {
                     requests.requestMatchers(ruta.getRuta()).hasRole(ruta.getRol().getRol());
@@ -28,29 +39,33 @@ public class SecurityConfig {
                     requests.requestMatchers(ruta.getRuta()).permitAll();
                 }
             }
+
+            // CUALQUIER OTRA RUTA → LOGIN
             requests.anyRequest().authenticated();
         });
 
-        http.formLogin(form -> form // Configuración de formulario de login
+        http.formLogin(form -> form
                 .loginPage("/login")
                 .loginProcessingUrl("/login")
                 .defaultSuccessUrl("/", true)
                 .failureUrl("/login?error=true")
                 .permitAll()
-        ).logout(logout -> logout // Configuración de logout
+        ).logout(logout -> logout
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/login?logout=true")
                 .invalidateHttpSession(true)
                 .deleteCookies("JSESSIONID")
                 .permitAll()
-        ).exceptionHandling(exceptions -> exceptions // Manejo de excepciones
+        ).exceptionHandling(exceptions -> exceptions
                 .accessDeniedPage("/acceso_denegado")
-        ).sessionManagement(session -> session // Configuración de sesiones
+        ).sessionManagement(session -> session
                 .maximumSessions(1)
                 .maxSessionsPreventsLogin(false)
         );
+
         return http.build();
     }
+
 
     @Bean
     public PasswordEncoder passwordEncoder() {

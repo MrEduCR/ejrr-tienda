@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import java.math.BigDecimal;
 
-
 @Service
 public class ProductoService {
 
@@ -30,43 +29,44 @@ public class ProductoService {
         }
         return productoRepository.findAll();
     }
-    
+
     @Transactional(readOnly = true)
-    public Optional<Producto> getProducto(Integer idProducto) {
+    public Optional<Producto> getProducto(Long idProducto) {
         return productoRepository.findById(idProducto);
     }
 
     @Transactional
     public void save(Producto producto, MultipartFile imagenFile) {
         producto = productoRepository.save(producto);
-        if (!imagenFile.isEmpty()) { //Si no está vacío... pasaron una imagen...            
+
+        if (!imagenFile.isEmpty()) {
             try {
                 String rutaImagen = firebaseStorageService.uploadImage(
-                        imagenFile, "producto",
-                        producto.getIdProducto());
+                        imagenFile,
+                        "producto",
+                        producto.getIdProducto() // Long correcto
+                );
                 producto.setRutaImagen(rutaImagen);
                 productoRepository.save(producto);
             } catch (IOException e) {
-
             }
         }
     }
 
     @Transactional
-    public void delete(Integer idProducto) {
-        // Verifica si el producto existe antes de intentar eliminarlo
+    public void delete(Long idProducto) {
+
         if (!productoRepository.existsById(idProducto)) {
-            // Lanza una excepción para indicar que el usuario no fue encontrado
             throw new IllegalArgumentException("El producto con ID " + idProducto + " no existe.");
         }
+
         try {
             productoRepository.deleteById(idProducto);
         } catch (DataIntegrityViolationException e) {
-            // Lanza una nueva excepción para encapsular el problema de integridad de datos
             throw new IllegalStateException("No se puede eliminar el producto. Tiene datos asociados.", e);
         }
     }
-    
+
     @Transactional(readOnly = true)
     public List<Producto> consultaDerivada(double precioInf, double precioSup) {
         return productoRepository.findByPrecioBetweenOrderByPrecioAsc(precioInf, precioSup);
@@ -81,11 +81,9 @@ public class ProductoService {
     public List<Producto> consultaSQL(double precioInf, double precioSup) {
         return productoRepository.consultaSQL(precioInf, precioSup);
     }
-    
+
     @Transactional(readOnly = true)
     public List<Producto> consultaPorPrecio(BigDecimal precio) {
         return productoRepository.findByPrecioExact(precio);
     }
-    
-    
 }
